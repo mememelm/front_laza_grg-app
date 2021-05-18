@@ -17,10 +17,15 @@ export class BaseApiService {
     })
   }
 
-  /**
-   * test
-   */
-  public test(): Observable<any> {
-    return this.http.get<any>(this.url + 'user/test', this.httOptions)
+  postData(url: any, body: any): Observable<any> {
+    return this.http.post<any>(this.url + url, JSON.stringify(body), this.httOptions)
+  }
+
+  getData(url: any): Observable<any> {
+    return this.http.get<any>(this.url + url, this.httOptions)
+  }
+
+  putData(urlParams:any): Observable<any> { 
+    return this.http.put(this.url + urlParams, this.httOptions)
   }
 }

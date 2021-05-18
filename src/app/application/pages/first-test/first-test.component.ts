@@ -7,18 +7,67 @@ import { BaseApiService } from 'src/app/services/base-api.service';
   styleUrls: ['./first-test.component.css']
 })
 export class FirstTestComponent implements OnInit {
-  data: any;
-  message: any;
+
+  public listUser: any = []
+
+  id: any
+  email: any
+  password: any
+  username: any
+  firstname: any
+  lastname: any
+
+  checkAction: any
 
   constructor(private api: BaseApiService) { }
 
   ngOnInit(): void {
-    this.api.test()
+    this.loadUser()
+  }
+
+  loadUser() {
+    this.checkAction = 'add'
+    this.api.getData('user/get-all')
       .subscribe((res: any) => {
-        this.data = res.data
-        this.message = res.message
-        console.log('data', this.data)
+        this.listUser = res.data
       })
+  }
+
+  addUser() {
+    const body = {
+      email: this.email,
+      password: this.password,
+      username: this.username,
+      firstname: this.firstname,
+      lastname: this.lastname
+    }
+    this.api.postData('user/add', body)
+      .subscribe((res: any) => {
+        if (res) {
+          this.loadUser()
+          this.resetFields()
+        }
+      })
+  }
+
+  showUser(user: any) {
+    this.checkAction = 'edit'
+    this.id = user?.id
+    this.email = user?.email
+    this.username = user?.username
+    this.firstname = user?.firstname
+    this.lastname = user?.lastname
+  }
+
+  editUser() {
+    this.api.putData('user/' + this.id)
+      .subscribe((res: any) => {
+        if (res) this.loadUser()
+      })
+  }
+
+  resetFields() {
+    this.email = this.password = this.firstname = this.lastname = this.username = ''
   }
 
 }
