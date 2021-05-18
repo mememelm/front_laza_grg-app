@@ -60,7 +60,14 @@ export class FirstTestComponent implements OnInit {
   }
 
   editUser() {
-    this.api.putData('user/' + this.id)
+    const body = {
+      email: this.email,
+      password: this.password,
+      username: this.username,
+      firstname: this.firstname,
+      lastname: this.lastname
+    }
+    this.api.putData('user/' + this.id, body)
       .subscribe((res: any) => {
         if (res) this.loadUser()
       })

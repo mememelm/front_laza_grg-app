@@ -25,7 +25,7 @@ export class BaseApiService {
     return this.http.get<any>(this.url + url, this.httOptions)
   }
 
-  putData(urlParams:any): Observable<any> { 
-    return this.http.put(this.url + urlParams, this.httOptions)
+  putData(urlParams:any, body: any): Observable<any> { 
+    return this.http.put(this.url + urlParams, JSON.stringify(body), this.httOptions)
   }
 }
