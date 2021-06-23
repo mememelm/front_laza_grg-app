@@ -7,14 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule } from "@angular/common/http";
-import { FirstTestComponent } from './application/pages/first-test/first-test.component';
-import { SecondTestComponent } from './application/pages/second-test/second-test.component';
+import { LoginComponent } from './page/login/login.component';
+import { RegisterComponent } from './page/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FirstTestComponent,
-    SecondTestComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
